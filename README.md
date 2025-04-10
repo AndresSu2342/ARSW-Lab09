@@ -56,7 +56,20 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
     * 1060000
     * 1070000
     * 1080000
-    * 1090000    
+    * 1090000   
+
+
+Time 1000000 15.95 s
+Time 1010000 16.28 s
+Time 1020000 16.50 s
+Time 1030000 16.86 s
+Time 1040000 17.32 s
+Time 1050000 19.25 s
+Time 1060000 18.21 s
+Time 1070000 18.58 s
+Time 1080000 18.87 s
+Time 1090000 19.21 s
+
 
 8. Dírijase ahora a Azure y verifique el consumo de CPU para la VM. (Los resultados pueden tardar 5 minutos en aparecer).
 
