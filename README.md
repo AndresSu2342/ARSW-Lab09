@@ -194,5 +194,28 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 * Presente el Diagrama de Despliegue de la solución.
 
 
+![Image](https://github.com/user-attachments/assets/f71527b3-7a8c-4f89-a2ca-2ca920c45536)
 
+![Image](https://github.com/user-attachments/assets/b42ee11a-ce20-45db-a3fa-bf2b9f0a9965)
 
+![Image](https://github.com/user-attachments/assets/beb7ecc3-e5fc-455a-862c-c269f1bfcecd)
+
+![Image](https://github.com/user-attachments/assets/087760dc-e999-449a-8870-67bb4e7bcc42)
+
+![Image](https://github.com/user-attachments/assets/75218613-6868-43b6-92cf-4f478d4e9cc3)
+
+![Image](https://github.com/user-attachments/assets/fc178d50-9155-4daf-9a3a-f5e0e1d69142)
+
+![Image](https://github.com/user-attachments/assets/0d997464-ae02-4f66-a0ed-5b9e8fbf0dc5)
+
+![Image](https://github.com/user-attachments/assets/74ce2278-4e7d-4108-b803-69959f8c01ea)
+
+![Image](https://github.com/user-attachments/assets/56858e61-e431-4975-9cc1-1d56e947b305)
+
+![Image](https://github.com/user-attachments/assets/deb28da2-4f4f-47b6-8c3e-c58dafaf761a)
+
+![Image](https://github.com/user-attachments/assets/523f5c94-a209-473d-8cb1-becfd760fc6e)
+
+![Image](https://github.com/user-attachments/assets/033d9254-d816-4238-8196-733c91a06b17)
+
+![Image](https://github.com/user-attachments/assets/845aea9f-d4ed-4c2b-8e58-e9005eaa8bac)
