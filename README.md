@@ -25,11 +25,31 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 ![Imágen 1](images/part1/part1-vm-basic-config.png)
 
+![Image](https://github.com/user-attachments/assets/f71527b3-7a8c-4f89-a2ca-2ca920c45536)
+
+![Image](https://github.com/user-attachments/assets/b42ee11a-ce20-45db-a3fa-bf2b9f0a9965)
+
+![Image](https://github.com/user-attachments/assets/beb7ecc3-e5fc-455a-862c-c269f1bfcecd)
+
+![Image](https://github.com/user-attachments/assets/087760dc-e999-449a-8870-67bb4e7bcc42)
+
 2. Para conectarse a la VM use el siguiente comando, donde las `x` las debe remplazar por la IP de su propia VM (Revise la sección "Connect" de la virtual machine creada para tener una guía más detallada).
 
     `ssh scalability_lab@xxx.xxx.xxx.xxx`
 
+![Image](https://github.com/user-attachments/assets/75218613-6868-43b6-92cf-4f478d4e9cc3)
+
+![Image](https://github.com/user-attachments/assets/fc178d50-9155-4daf-9a3a-f5e0e1d69142)
+
 3. Instale node, para ello siga la sección *Installing Node.js and npm using NVM* que encontrará en este [enlace](https://linuxize.com/post/how-to-install-node-js-on-ubuntu-18.04/).
+
+![Image](https://github.com/user-attachments/assets/0d997464-ae02-4f66-a0ed-5b9e8fbf0dc5)
+
+![Image](https://github.com/user-attachments/assets/74ce2278-4e7d-4108-b803-69959f8c01ea)
+
+![Image](https://github.com/user-attachments/assets/56858e61-e431-4975-9cc1-1d56e947b305)
+
+
 4. Para instalar la aplicación adjunta al Laboratorio, suba la carpeta `FibonacciApp` a un repositorio al cual tenga acceso y ejecute estos comandos dentro de la VM:
 
     `git clone <your_repo>`
@@ -38,13 +58,21 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
     `npm install`
 
+![Image](https://github.com/user-attachments/assets/deb28da2-4f4f-47b6-8c3e-c58dafaf761a)
+
 5. Para ejecutar la aplicación puede usar el comando `npm FibinacciApp.js`, sin embargo una vez pierda la conexión ssh la aplicación dejará de funcionar. Para evitar ese compartamiento usaremos *forever*. Ejecute los siguientes comando dentro de la VM.
 
     ` node FibonacciApp.js`
 
+![Image](https://github.com/user-attachments/assets/523f5c94-a209-473d-8cb1-becfd760fc6e)
+
 6. Antes de verificar si el endpoint funciona, en Azure vaya a la sección de *Networking* y cree una *Inbound port rule* tal como se muestra en la imágen. Para verificar que la aplicación funciona, use un browser y user el endpoint `http://xxx.xxx.xxx.xxx:3000/fibonacci/6`. La respuesta debe ser `The answer is 8`.
 
 ![](images/part1/part1-vm-3000InboudRule.png)
+
+![Image](https://github.com/user-attachments/assets/033d9254-d816-4238-8196-733c91a06b17)
+
+![Image](https://github.com/user-attachments/assets/845aea9f-d4ed-4c2b-8e58-e9005eaa8bac)
 
 7. La función que calcula en enésimo número de la secuencia de Fibonacci está muy mal construido y consume bastante CPU para obtener la respuesta. Usando la consola del Browser documente los tiempos de respuesta para dicho endpoint usando los siguintes valores:
     * 1000000
@@ -59,21 +87,23 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
     * 1090000   
 
 
-Time 1000000 15.95 s
-Time 1010000 16.28 s
-Time 1020000 16.50 s
-Time 1030000 16.86 s
-Time 1040000 17.32 s
-Time 1050000 19.25 s
-Time 1060000 18.21 s
-Time 1070000 18.58 s
-Time 1080000 18.87 s
-Time 1090000 19.21 s
+* Time 1000000 - 15.95 s
+* Time 1010000 - 16.28 s
+* Time 1020000 - 16.50 s
+* Time 1030000 - 16.86 s
+* Time 1040000 - 17.32 s
+* Time 1050000 - 19.25 s
+* Time 1060000 - 18.21 s
+* Time 1070000 - 18.58 s
+* Time 1080000 - 18.87 s
+* Time 1090000 - 19.21 s
 
 
 8. Dírijase ahora a Azure y verifique el consumo de CPU para la VM. (Los resultados pueden tardar 5 minutos en aparecer).
 
 ![Imágen 2](images/part1/part1-vm-cpu.png)
+
+
 
 9. Ahora usaremos Postman para simular una carga concurrente a nuestro sistema. Siga estos pasos.
     * Instale newman con el comando `npm install newman -g`. Para conocer más de Newman consulte el siguiente [enlace](https://learning.getpostman.com/docs/postman/collection-runs/command-line-integration-with-newman/).
@@ -207,28 +237,12 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 * Presente el Diagrama de Despliegue de la solución.
 
 
-![Image](https://github.com/user-attachments/assets/f71527b3-7a8c-4f89-a2ca-2ca920c45536)
 
-![Image](https://github.com/user-attachments/assets/b42ee11a-ce20-45db-a3fa-bf2b9f0a9965)
 
-![Image](https://github.com/user-attachments/assets/beb7ecc3-e5fc-455a-862c-c269f1bfcecd)
 
-![Image](https://github.com/user-attachments/assets/087760dc-e999-449a-8870-67bb4e7bcc42)
 
-![Image](https://github.com/user-attachments/assets/75218613-6868-43b6-92cf-4f478d4e9cc3)
 
-![Image](https://github.com/user-attachments/assets/fc178d50-9155-4daf-9a3a-f5e0e1d69142)
 
-![Image](https://github.com/user-attachments/assets/0d997464-ae02-4f66-a0ed-5b9e8fbf0dc5)
 
-![Image](https://github.com/user-attachments/assets/74ce2278-4e7d-4108-b803-69959f8c01ea)
 
-![Image](https://github.com/user-attachments/assets/56858e61-e431-4975-9cc1-1d56e947b305)
 
-![Image](https://github.com/user-attachments/assets/deb28da2-4f4f-47b6-8c3e-c58dafaf761a)
-
-![Image](https://github.com/user-attachments/assets/523f5c94-a209-473d-8cb1-becfd760fc6e)
-
-![Image](https://github.com/user-attachments/assets/033d9254-d816-4238-8196-733c91a06b17)
-
-![Image](https://github.com/user-attachments/assets/845aea9f-d4ed-4c2b-8e58-e9005eaa8bac)
