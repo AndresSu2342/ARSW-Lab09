@@ -236,7 +236,7 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
    ### Maquina tamaño B2ms (2 vCPUs, 8 GiB RAM)
 
-   ![Image](https://github.com/user-attachments/assets/d5b65406-1052-4d6d-9466-adcf831a083e)
+   ![Image](https://github.com/user-attachments/assets/ebf74418-9862-4f0c-a131-ad6d2f6afbd2)
 
 
 
