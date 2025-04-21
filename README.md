@@ -166,17 +166,20 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
    * vertical-scalability851 – Network Interface
    * VERTICAL-SCALABILITY_OsDisk... – Disk (Disco del SO)
 
+    ![Image](https://github.com/user-attachments/assets/3357da95-aed6-495d-8ad2-74a7bde0d4cd)
+
 2. ¿Brevemente describa para qué sirve cada recurso?
 
-   Recurso | Tipo | ¿Para qué sirve?
-   scalability_lab_KEY | SSH Key | Clave pública SSH que se usó para conectarse de forma segura a la VM.
-   scalability_lab_KEY2 | SSH Key | Otra clave pública SSH (posiblemente creada por error o por probar otra conexión).
-   VERTICAL-SCALABILITY | Virtual Machine | La máquina virtual real. Este es el "servidor" donde corre tu app Node.js.
-   VERTICAL-SCALABILITY-ip | Public IP Address | La dirección IP pública que se usa para conectarte a la VM desde internet.
-   VERTICAL-SCALABILITY-nsg | Network Security Group | Como un firewall: controla qué tráfico (puertos y protocolos) puede entrar o salir de la VM.
-   VERTICAL-SCALABILITY-vnet | Virtual Network (VNet) | Red privada virtual donde está conectada tu VM. Permite que otros recursos se comuniquen dentro del mismo entorno sin exponer todo a internet.
-   vertical-scalability851 | Network Interface (NIC) | Interfaz de red que conecta la VM a la red virtual. Es lo que permite que la VM tenga una IP y pueda "hablar" con el mundo.
-   VERTICAL-SCALABILITY_OsDisk... | Disk | El disco duro virtual que contiene el sistema operativo de la VM (Ubuntu en este caso).
+   | **Recurso**                          | **Tipo**                    | **¿Para qué sirve?**                                                                                           |
+   |-------------------------------------|-----------------------------|----------------------------------------------------------------------------------------------------------------|
+   | `scalability_lab_KEY`               | SSH Key                     | Clave pública SSH usada para conectarte de forma segura a la VM.                                               |
+   | `VERTICAL-SCALABILITY`              | Virtual Machine             | La máquina virtual donde corre la app de Node.js.                                                              |
+   | `VERTICAL-SCALABILITY-ip`           | Public IP Address           | Dirección IP pública de la VM para acceder desde Internet.                                                     |
+   | `VERTICAL-SCALABILITY-nsg`          | Network Security Group      | Firewall que controla qué tráfico entra y sale de la VM (ej: permite puerto 3000 para la ejecucion de la app). |
+   | `VERTICAL-SCALABILITY-vnet`         | Virtual Network (VNet)      | Red privada donde está conectada la VM. Facilita la comunicación entre recursos sin exponerlos.                |
+   | `vertical-scalability851`           | Network Interface (NIC)     | Conecta la VM a la red virtual. Es como la tarjeta de red de la máquina.                                       |
+   | `VERTICAL-SCALABILITY_OsDisk...`    | Disk                        | Disco virtual que contiene el sistema operativo (Ubuntu).                                                      |
+
 
 3. ¿Al cerrar la conexión ssh con la VM, por qué se cae la aplicación que ejecutamos con el comando `npm FibonacciApp.js`? ¿Por qué debemos crear un *Inbound port rule* antes de acceder al servicio?
 
@@ -187,15 +190,125 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
     Nuestra aplicación corre en el puerto 3000, que por defecto está bloqueado. Entonces, necesitamos agregar una regla de entrada (inbound rule) que permita tráfico TCP al puerto 3000 para que podamos entrar desde el navegador o Postman
 
 4. Adjunte tabla de tiempos e interprete por qué la función tarda tando tiempo.
+
+    ### Maquina tamaño B1ls (1 vCPU, 0.5 GiB RAM)
+
+    | **Input (n)** | **Tiempo (s)** |
+    |---------------|----------------|
+    | 1,000,000     | 15.95          |
+    | 1,010,000     | 16.28          |
+    | 1,020,000     | 16.50          |
+    | 1,030,000     | 16.86          |
+    | 1,040,000     | 17.32          |
+    | 1,050,000     | 19.25          |
+    | 1,060,000     | 18.21          |
+    | 1,070,000     | 18.58          |
+    | 1,080,000     | 18.87          |
+    | 1,090,000     | 19.21          |
+    
+    ---
+    
+    ### Maquina tamaño B2ms (2 vCPUs, 8 GiB RAM)
+    
+    | **Input (n)** | **Tiempo (s)** |
+    |---------------|----------------|
+    | 1,000,000     | 12.73          |
+    | 1,010,000     | 12.89          |
+    | 1,020,000     | 12.97          |
+    | 1,030,000     | 13.18          |
+    | 1,040,000     | 13.80          |
+    | 1,050,000     | 13.94          |
+    | 1,060,000     | 14.07          |
+    | 1,070,000     | 14.67          |
+    | 1,080,000     | 14.70          |
+    | 1,090,000     | 15.16          |
+
+    
+
 5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU.
+
+    ### Maquina tamaño B1ls (1 vCPU, 0.5 GiB RAM)
+
+   ![Image](https://github.com/user-attachments/assets/1c1f3d8d-5e51-4dba-bd59-0391a7c35598)
+
+    ### Maquina tamaño B2ms (2 vCPUs, 8 GiB RAM)
+
+   ![Image](https://github.com/user-attachments/assets/bc0377dc-17b1-46f3-ac7d-35c2aff3181d)
+
+
+
 6. Adjunte la imagen del resumen de la ejecución de Postman. Interprete:
     * Tiempos de ejecución de cada petición.
     * Si hubo fallos documentelos y explique.
+
+   ### Maquina tamaño B1ls (1 vCPU, 0.5 GiB RAM)
+
+   ![Image](https://github.com/user-attachments/assets/f0292cc9-0767-4c04-83c1-dc8480e4026f)
+
+   ### Maquina tamaño B2ms (2 vCPUs, 8 GiB RAM)
+
+   ![Image](https://github.com/user-attachments/assets/d5b65406-1052-4d6d-9466-adcf831a083e)
+
+
+
+
 7. ¿Cuál es la diferencia entre los tamaños `B2ms` y `B1ls` (no solo busque especificaciones de infraestructura)?
+
+   Aunque ambos tamaños pertenecen a la serie B (Burstable) de máquinas virtuales en Azure, están diseñados para casos de uso muy distintos en cuanto a capacidad de procesamiento, escalabilidad y estabilidad operativa.
+
+    1. Capacidad de cómputo y memoria
+       * El tamaño B1ls es una de las instancias más pequeñas de Azure, con 1 vCPU y 0.5 GiB de RAM, pensada exclusivamente para cargas de trabajo extremadamente ligeras como pruebas simples, scripts de automatización o servidores mínimos de desarrollo. 
+       * En cambio, B2ms cuenta con 2 vCPUs y 8 GiB de RAM, lo que le permite ejecutar aplicaciones de producción con un requerimiento moderado de recursos, como servidores web, APIs, y cargas interactivas.
+    
+    2. Manejo del rendimiento (créditos de CPU)
+       * Ambas instancias funcionan bajo el modelo burstable, es decir, acumulan créditos de CPU cuando tienen bajo uso y los consumen al momento de necesitar más procesamiento. 
+       Sin embargo, B2ms no solo tiene más vCPUs, sino que su capacidad para sostener picos de uso es mucho mayor, ya que acumula y mantiene más créditos, mientras que B1ls los agota muy rápidamente y luego queda limitado a un rendimiento mínimo sostenido.
+    
+    3. Estabilidad bajo carga
+       * En aplicaciones que requieren tiempo de CPU constante o cálculos intensivos (como procesamiento de datos o funciones matemáticas complejas), B1ls se degrada rápidamente, presentando tiempos de respuesta inestables o lentitud significativa tras agotar sus créditos. 
+       * B2ms, en cambio, ofrece un desempeño mucho más estable y sostenido, incluso si la carga se mantiene constante, lo que lo hace más adecuado para entornos donde la disponibilidad y el rendimiento no deben fluctuar.
+
 8. ¿Aumentar el tamaño de la VM es una buena solución en este escenario?, ¿Qué pasa con la FibonacciApp cuando cambiamos el tamaño de la VM?
+
+    Parcialmente, al pasar de una máquina B1ls (1 vCPU, 0.5 GB RAM) a una B2ms (2 vCPU, 8 GB RAM), se observó una reducción clara en los tiempos de ejecución de la función Fibonacci y un uso más equilibrado del CPU.
+    Por ejemplo, vemos que para el mismo rango de entradas (de 1,000,000 a 1,090,000), los tiempos pasaron de un promedio de 17.5s (en B1ls) a cerca de 13.5s (en B2ms). Esto indica que la función se beneficia de una mayor capacidad de cómputo, particularmente en términos de CPU y RAM disponibles.
+    Aumentar la VM mejora el rendimiento, pero solo hasta cierto punto. Ya que si el código no escala bien con más recursos, seguir aumentandole hardware se vuelve una solución cara e ineficiente.
+
 9. ¿Qué pasa con la infraestructura cuando cambia el tamaño de la VM? ¿Qué efectos negativos implica?
+
+   Cambiar el tamaño de una VM impacta directamente en la infraestructura en varios sentidos:
+
+    1. Costo:
+    El tamaño B2ms tiene un costo significativamente mayor que el B1ls. Esto puede ser prohibitivo si se escala horizontalmente o si se usa por largos períodos.
+    
+    2. Consumo de recursos:
+    Una máquina más grande consume más recursos del proveedor (Azure en este caso), lo cual puede afectar la planificación presupuestaria o los límites de recursos de una suscripción.
+    
+    3. Interrupciones:
+    Para cambiar el tamaño de una VM, normalmente se requiere reiniciar la máquina, lo que puede generar downtime si no se gestiona correctamente.
+    
+    4. Sobreaprovisionamiento:
+    Si no se necesita toda la capacidad extra, se estaría pagando por recursos no utilizados, lo que no es óptimo.
+
 10. ¿Hubo mejora en el consumo de CPU o en los tiempos de respuesta? Si/No ¿Por qué?
+
+    Sí, hubo mejora en ambos aspectos, y se puede justificar así:
+    
+    1. Consumo de CPU:
+    
+       * En B1ls, el CPU estaba al 97.32%, lo que indica saturación total. 
+       * En B2ms, bajó a 50.52%, lo que significa que hay suficiente capacidad sobrante para mantener la app estable y posiblemente aceptar más peticiones simultáneas.
+    
+    2. Tiempos de respuesta:
+    
+       * Promedio en B1ls: 15.8s 
+       * Promedio en B2ms: 12.8s
+    
+    Esto significa una mejora de aproximadamente 19% en el tiempo de respuesta, lo cual es notable para cargas de este tipo. Además, no hubo fallos en ninguna de las ejecuciones, lo que confirma la estabilidad del sistema incluso con alta demanda de procesamiento.
+
 11. Aumente la cantidad de ejecuciones paralelas del comando de postman a `4`. ¿El comportamiento del sistema es porcentualmente mejor?
+
+    
 
 ### Parte 2 - Escalabilidad horizontal
 
