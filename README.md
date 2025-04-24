@@ -310,16 +310,16 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
    Cambiar el tamaño de una VM impacta directamente en la infraestructura en varios sentidos:
 
-    1. Costo:
+    1. **Costo:**
     El tamaño B2ms tiene un costo significativamente mayor que el B1ls. Esto puede ser prohibitivo si se escala horizontalmente o si se usa por largos períodos.
     
-    2. Consumo de recursos:
+    2. **Consumo de recursos:**
     Una máquina más grande consume más recursos del proveedor (Azure en este caso), lo cual puede afectar la planificación presupuestaria o los límites de recursos de una suscripción.
     
-    3. Interrupciones:
+    3. **Interrupciones:**
     Para cambiar el tamaño de una VM, normalmente se requiere reiniciar la máquina, lo que puede generar downtime si no se gestiona correctamente.
     
-    4. Sobreaprovisionamiento:
+    4. **Sobreaprovisionamiento:**
     Si no se necesita toda la capacidad extra, se estaría pagando por recursos no utilizados, lo que no es óptimo.
 
 10. ¿Hubo mejora en el consumo de CPU o en los tiempos de respuesta? Si/No ¿Por qué?
@@ -414,15 +414,19 @@ Ahora vamos a crear 3 VMs (VM1, VM2 y VM3) con direcciones IP públicas standar 
 
 ![](images/part2/part2-vm-create2.png)
 
-
+![Image](https://github.com/user-attachments/assets/02064004-6333-4c54-9d21-2a69e0d9cdde)
 
 3. Para el Network Security Group seleccione "avanzado" y realice la siguiente configuración. No olvide crear un *Inbound Rule*, en el cual habilite el tráfico por el puerto 3000. Cuando cree la VM2 y la VM3, no necesita volver a crear el *Network Security Group*, sino que puede seleccionar el anteriormente creado.
 
 ![](images/part2/part2-vm-create3.png)
 
+![Image](https://github.com/user-attachments/assets/ce956e72-c969-4db8-939b-b95b5d907350)
+
 4. Ahora asignaremos esta VM a nuestro balanceador de carga, para ello siga la configuración de la siguiente imágen.
 
 ![](images/part2/part2-vm-create4.png)
+
+![Image](https://github.com/user-attachments/assets/51e07607-bc5c-407b-867d-d23cc1bf8dfc)
 
 5. Finalmente debemos instalar la aplicación de Fibonacci en la VM. para ello puede ejecutar el conjunto de los siguientes comandos, cambiando el nombre de la VM por el correcto
 
@@ -439,6 +443,14 @@ npm install
 npm install forever -g
 forever start FibonacciApp.js
 ```
+
+![Image](https://github.com/user-attachments/assets/658c7400-0dc9-4bc2-b84f-a69886e81c7a)
+
+![Image](https://github.com/user-attachments/assets/073929b1-3f64-4c9c-bcc0-50ef3daa2080)
+
+![Image](https://github.com/user-attachments/assets/aa5b0dd9-5975-4ce9-8a70-941cb2cc54fb)
+
+![Image](https://github.com/user-attachments/assets/cc8124c2-bcf1-4a54-9d90-b7ddd2c50ec4)
 
 Realice este proceso para las 3 VMs, por ahora lo haremos a mano una por una, sin embargo es importante que usted sepa que existen herramientas para aumatizar este proceso, entre ellas encontramos Azure Resource Manager, OsDisk Images, Terraform con Vagrant y Paker, Puppet, Ansible entre otras.
 
@@ -465,12 +477,89 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 **Preguntas**
 
 * ¿Cuáles son los tipos de balanceadores de carga en Azure y en qué se diferencian?, ¿Qué es SKU, qué tipos hay y en qué se diferencian?, ¿Por qué el balanceador de carga necesita una IP pública?
+
+    Azure tiene dos tipos principales de balanceadores de carga:
+
+    1. **Load Balancer Público**
+       Se usa para distribuir tráfico desde internet hacia tus recursos internos, como máquinas virtuales.
+       Ejemplo: Si estás montando una app web, este balanceador reparte el tráfico que entra desde fuera.
+
+    2. **Load Balancer Interno**
+       Se usa para distribuir tráfico dentro de una red virtual privada (VNet).
+       Ideal para microservicios, bases de datos, o aplicaciones internas que no deben exponerse a internet.
+
+    -------------------------
+
+    SKU = Stock Keeping Unit, pero en Azure se usa para diferenciar la versión o tipo de recurso que estás usando. En el caso del Load Balancer, hay dos SKUs:
+
+    Basic
+    * Más limitado y gratuito. 
+    * No soporta zonas de disponibilidad.
+    * No se puede usar con redes virtuales globales (peering limitado).
+    * No se puede actualizar a “Standard”.
+    
+    Standard 
+    * Nivel empresarial.
+    * Más confiable, escala automáticamente. 
+    * Soporta zonas de disponibilidad (alta disponibilidad real). 
+    * Incluye métricas, diagnósticos y control de acceso (NSGs). 
+    * Requiere una IP pública “Standard”.
+  
+    ------------
+
+    El balanceador de carga necesita una IP pública cuando se quiere exponer una aplicación o servicio a internet, ya que esta IP actúa como el punto de entrada visible desde fuera de la red virtual. Sin una IP pública, el balanceador no podría recibir solicitudes externas ni distribuirlas a los recursos internos, como máquinas virtuales o contenedores, que se encuentran dentro de la red privada de Azure. 
+    Por eso, en escenarios donde se necesita acceso público (como páginas web o APIs), la IP pública es esencial para establecer la conexión entre los usuarios y los servicios alojados.
+
 * ¿Cuál es el propósito del *Backend Pool*?
+
+    El Backend Pool es el grupo de recursos que reciben el tráfico que llega al balanceador. Básicamente, ahí es donde metémos las máquinas virtuales, instancias de escalado automático (VMSS) u otros servicios que van a procesar las solicitudes del usuario.
+
 * ¿Cuál es el propósito del *Health Probe*?
+
+    El Health Probe se encarga de monitorear la salud de las instancias dentro del Backend Pool. Cada cierto tiempo, el Load Balancer hace chequeos de HTTP, TCP o HTTPS para asegurarse de que esas instancias estén vivas y funcionando correctamente.
+
 * ¿Cuál es el propósito de la *Load Balancing Rule*? ¿Qué tipos de sesión persistente existen, por qué esto es importante y cómo puede afectar la escalabilidad del sistema?.
+
+    La Load Balancing Rule (regla de balanceo de carga) en Azure define cómo y cuándo se distribuye el tráfico desde una dirección IP frontal (frontend) hacia el grupo de instancias del Backend Pool.
+    Su propósito es establecer el comportamiento de red deseado para garantizar una distribución eficiente del tráfico entre los recursos del backend.
+
+    -----------
+
+    Azure permite configurar una opción llamada "sesión persistente" (Session Persistence o Affinity) en la regla de balanceo, con los siguientes tipos:
+
+    * **None:** No hay persistencia. Cualquier solicitud puede ir a cualquier instancia. 
+    * **Client IP:** El tráfico del mismo cliente (por IP) siempre se dirige a la misma instancia. 
+    * **Client IP and Protocol:** Se mantiene la afinidad por dirección IP y tipo de protocolo.
+    
+    La persistencia es útil cuando una aplicación mantiene estado, por ejemplo, sesiones de usuario en memoria, que deben atenderse siempre desde la misma instancia.
+
 * ¿Qué es una *Virtual Network*? ¿Qué es una *Subnet*? ¿Para qué sirven los *address space* y *address range*?
+
+    Una **Virtual Network** (VNet) en Azure es una red privada definida por el usuario dentro de la nube, que permite que los recursos como máquinas virtuales, bases de datos o servicios de Azure se comuniquen entre sí de manera segura. Es el equivalente a una red física tradicional en un datacenter, pero implementada de forma virtual.
+
+    Dentro de una VNet, se pueden crear **subredes** (Subnets), que dividen el espacio de direcciones IP de la VNet en segmentos más pequeños, permitiendo una organización lógica de recursos y la aplicación de reglas de seguridad más específicas.
+
+    * El **Address Space** es el rango total de direcciones IP disponibles para la red virtual (por ejemplo, 10.0.0.0/16). 
+    * El **Address Range** o prefijo de una subnet (por ejemplo, 10.0.1.0/24) define un subconjunto del address space asignado a una subred específica.
+
+    Estas configuraciones permiten definir cómo se estructuran las direcciones IP dentro de la red, cómo se segmenta el tráfico, y facilitan el control del enrutamiento y la seguridad
+
 * ¿Qué son las *Availability Zone* y por qué seleccionamos 3 diferentes zonas?. ¿Qué significa que una IP sea *zone-redundant*?
-* ¿Cuál es el propósito del *Network Security Group*?
+
+    Las Availability Zones (Zonas de Disponibilidad) son ubicaciones físicas separadas dentro de una misma región de Azure, cada una con su propio suministro eléctrico, red y refrigeración. Su propósito principal es garantizar la alta disponibilidad y tolerancia a fallos: si una zona falla (por ejemplo, por un corte eléctrico), las otras siguen funcionando.
+
+    Seleccionar tres zonas diferentes permite distribuir los recursos críticos (como máquinas virtuales, bases de datos o balanceadores de carga) de forma redundante entre ellas. Esto mejora significativamente la resiliencia del sistema frente a fallos zonales, asegurando la continuidad del servicio incluso si una zona completa se vuelve inaccesible.
+
+    ------------
+
+    Una IP pública zone-redundant es una dirección IP configurada para estar disponible en todas las zonas de disponibilidad de una región. Esto significa que puede enrutar tráfico hacia recursos ubicados en cualquiera de las zonas sin depender de una zona específica.
+
+* ¿Cuál es el propósito del *Network Security Group*? 
+
+    Un Network Security Group en Azure actúa como un firewall lógico a nivel de red, permitiendo o denegando el tráfico hacia y desde los recursos de una red virtual. El NSG contiene reglas que controlan el tráfico entrante y saliente basado en criterios como puertos, direcciones IP, protocolos y etiquetas de Azure.
+
+    Su propósito principal es proteger los recursos (por ejemplo, máquinas virtuales o subredes completas) frente a accesos no autorizados o tráfico malicioso, aplicando políticas de seguridad que son fáciles de configurar, escalar y mantener.
+
 * Informe de newman 1 (Punto 2)
 * Presente el Diagrama de Despliegue de la solución.
 
