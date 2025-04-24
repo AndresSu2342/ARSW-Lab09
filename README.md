@@ -402,7 +402,7 @@ Ahora vamos a crear 3 VMs (VM1, VM2 y VM3) con direcciones IP públicas standar 
 
 1. En la configuración básica de la VM guíese por la siguiente imágen. Es importante que se fije en la "Avaiability Zone", donde la VM1 será 1, la VM2 será 2 y la VM3 será 3.
 
-![](images/part2/part2-vm-create1.png)
+    ![](images/part2/part2-vm-create1.png)
 
     Creamos las 3 maquinas virtuales diferenciandolas por el nombre y donde cada una va abarcar una zona de disponibilidad diferente
 
@@ -414,7 +414,7 @@ Ahora vamos a crear 3 VMs (VM1, VM2 y VM3) con direcciones IP públicas standar 
 
 2. En la configuración de networking, verifique que se ha seleccionado la *Virtual Network*  y la *Subnet* creadas anteriormente. Adicionalmente asigne una IP pública y no olvide habilitar la redundancia de zona.
 
-![](images/part2/part2-vm-create2.png)
+    ![](images/part2/part2-vm-create2.png)
 
     Verificamos que se ha seleccionado la Virtual Network y la Subnet creadas anteriormente. Adicionalmente asignamos una IP pública y habilitamos la redundancia de zona.
 
@@ -422,7 +422,7 @@ Ahora vamos a crear 3 VMs (VM1, VM2 y VM3) con direcciones IP públicas standar 
 
 3. Para el Network Security Group seleccione "avanzado" y realice la siguiente configuración. No olvide crear un *Inbound Rule*, en el cual habilite el tráfico por el puerto 3000. Cuando cree la VM2 y la VM3, no necesita volver a crear el *Network Security Group*, sino que puede seleccionar el anteriormente creado.
 
-![](images/part2/part2-vm-create3.png)
+    ![](images/part2/part2-vm-create3.png)
 
     Damos a la opcion de avanzado, creamos nuestro network security group asignando las caracteristicas dadas, y consiguiente creamos la inbound rule para habilitar el trafico en el puerto 3000
 
@@ -430,7 +430,7 @@ Ahora vamos a crear 3 VMs (VM1, VM2 y VM3) con direcciones IP públicas standar 
 
 4. Ahora asignaremos esta VM a nuestro balanceador de carga, para ello siga la configuración de la siguiente imágen.
 
-![](images/part2/part2-vm-create4.png)
+    ![](images/part2/part2-vm-create4.png)
 
     Asignamos nuestro balanceador de carga y el grupo de back-end creado anteriormente
 
@@ -438,19 +438,19 @@ Ahora vamos a crear 3 VMs (VM1, VM2 y VM3) con direcciones IP públicas standar 
 
 5. Finalmente debemos instalar la aplicación de Fibonacci en la VM. para ello puede ejecutar el conjunto de los siguientes comandos, cambiando el nombre de la VM por el correcto
 
-```
-git clone https://github.com/daprieto1/ARSW_LOAD-BALANCING_AZURE.git
-
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
-source /home/vm1/.bashrc
-nvm install node
-
-cd ARSW_LOAD-BALANCING_AZURE/FibonacciApp
-npm install
-
-npm install forever -g
-forever start FibonacciApp.js
-```
+    ```
+    git clone https://github.com/daprieto1/ARSW_LOAD-BALANCING_AZURE.git
+    
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+    source /home/vm1/.bashrc
+    nvm install node
+    
+    cd ARSW_LOAD-BALANCING_AZURE/FibonacciApp
+    npm install
+    
+    npm install forever -g
+    forever start FibonacciApp.js
+    ```
 
     Creamos la maquina y verficamos que la implementacion se haya hecho correctamente
 
