@@ -404,29 +404,37 @@ Ahora vamos a crear 3 VMs (VM1, VM2 y VM3) con direcciones IP públicas standar 
 
 ![](images/part2/part2-vm-create1.png)
 
-![Image](https://github.com/user-attachments/assets/ec8067b3-6fb8-4074-b0f4-4d01a21f263a)
+    Creamos las 3 maquinas virtuales diferenciandolas por el nombre y donde cada una va abarcar una zona de disponibilidad diferente
 
-![Image](https://github.com/user-attachments/assets/8d01b0c2-06ba-468f-b23e-d9fed6d2752c)
-
-![Image](https://github.com/user-attachments/assets/25b8a5e6-a04d-4e24-9919-007d6b0df51f)
+    ![Image](https://github.com/user-attachments/assets/ec8067b3-6fb8-4074-b0f4-4d01a21f263a)
+    
+    ![Image](https://github.com/user-attachments/assets/8d01b0c2-06ba-468f-b23e-d9fed6d2752c)
+    
+    ![Image](https://github.com/user-attachments/assets/25b8a5e6-a04d-4e24-9919-007d6b0df51f)
 
 2. En la configuración de networking, verifique que se ha seleccionado la *Virtual Network*  y la *Subnet* creadas anteriormente. Adicionalmente asigne una IP pública y no olvide habilitar la redundancia de zona.
 
 ![](images/part2/part2-vm-create2.png)
 
-![Image](https://github.com/user-attachments/assets/02064004-6333-4c54-9d21-2a69e0d9cdde)
+    Verificamos que se ha seleccionado la Virtual Network y la Subnet creadas anteriormente. Adicionalmente asignamos una IP pública y habilitamos la redundancia de zona.
+
+    ![Image](https://github.com/user-attachments/assets/02064004-6333-4c54-9d21-2a69e0d9cdde)
 
 3. Para el Network Security Group seleccione "avanzado" y realice la siguiente configuración. No olvide crear un *Inbound Rule*, en el cual habilite el tráfico por el puerto 3000. Cuando cree la VM2 y la VM3, no necesita volver a crear el *Network Security Group*, sino que puede seleccionar el anteriormente creado.
 
 ![](images/part2/part2-vm-create3.png)
 
-![Image](https://github.com/user-attachments/assets/ce956e72-c969-4db8-939b-b95b5d907350)
+    Damos a la opcion de avanzado, creamos nuestro network security group asignando las caracteristicas dadas, y consiguiente creamos la inbound rule para habilitar el trafico en el puerto 3000
+
+    ![Image](https://github.com/user-attachments/assets/ce956e72-c969-4db8-939b-b95b5d907350)
 
 4. Ahora asignaremos esta VM a nuestro balanceador de carga, para ello siga la configuración de la siguiente imágen.
 
 ![](images/part2/part2-vm-create4.png)
 
-![Image](https://github.com/user-attachments/assets/51e07607-bc5c-407b-867d-d23cc1bf8dfc)
+    Asignamos nuestro balanceador de carga y el grupo de back-end creado anteriormente
+
+    ![Image](https://github.com/user-attachments/assets/51e07607-bc5c-407b-867d-d23cc1bf8dfc)
 
 5. Finalmente debemos instalar la aplicación de Fibonacci en la VM. para ello puede ejecutar el conjunto de los siguientes comandos, cambiando el nombre de la VM por el correcto
 
@@ -444,13 +452,21 @@ npm install forever -g
 forever start FibonacciApp.js
 ```
 
-![Image](https://github.com/user-attachments/assets/658c7400-0dc9-4bc2-b84f-a69886e81c7a)
+    Creamos la maquina y verficamos que la implementacion se haya hecho correctamente
 
-![Image](https://github.com/user-attachments/assets/073929b1-3f64-4c9c-bcc0-50ef3daa2080)
+    ![Image](https://github.com/user-attachments/assets/658c7400-0dc9-4bc2-b84f-a69886e81c7a)
 
-![Image](https://github.com/user-attachments/assets/aa5b0dd9-5975-4ce9-8a70-941cb2cc54fb)
+    Ejecutamos y accedemos a la maquina, luego clonamos el repositorio dado y ejecutamos el comando `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash`
+    
+    ![Image](https://github.com/user-attachments/assets/073929b1-3f64-4c9c-bcc0-50ef3daa2080)
+    
+    Seguimos ejecutando `source /home/vm1/.bashrc`, luego instalamos node y las dependencias para ejecutar la aplicacion con el comando `npm install forever -g`
 
-![Image](https://github.com/user-attachments/assets/cc8124c2-bcf1-4a54-9d90-b7ddd2c50ec4)
+    ![Image](https://github.com/user-attachments/assets/aa5b0dd9-5975-4ce9-8a70-941cb2cc54fb)
+
+    Por ultimo ejecutamos la aplicacion con el comando `forever start FibonacciApp.js`
+    
+    ![Image](https://github.com/user-attachments/assets/cc8124c2-bcf1-4a54-9d90-b7ddd2c50ec4)
 
 Realice este proceso para las 3 VMs, por ahora lo haremos a mano una por una, sin embargo es importante que usted sepa que existen herramientas para aumatizar este proceso, entre ellas encontramos Azure Resource Manager, OsDisk Images, Terraform con Vagrant y Paker, Puppet, Ansible entre otras.
 
@@ -490,15 +506,15 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 
     -------------------------
 
-    SKU = Stock Keeping Unit, pero en Azure se usa para diferenciar la versión o tipo de recurso que estás usando. En el caso del Load Balancer, hay dos SKUs:
+    **SKU = Stock Keeping Unit**, pero en Azure se usa para diferenciar la versión o tipo de recurso que estás usando. En el caso del Load Balancer, hay dos SKUs:
 
-    Basic
+    **Basic**
     * Más limitado y gratuito. 
     * No soporta zonas de disponibilidad.
     * No se puede usar con redes virtuales globales (peering limitado).
     * No se puede actualizar a “Standard”.
     
-    Standard 
+    **Standard** 
     * Nivel empresarial.
     * Más confiable, escala automáticamente. 
     * Soporta zonas de disponibilidad (alta disponibilidad real). 
@@ -508,19 +524,20 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
     ------------
 
     El balanceador de carga necesita una IP pública cuando se quiere exponer una aplicación o servicio a internet, ya que esta IP actúa como el punto de entrada visible desde fuera de la red virtual. Sin una IP pública, el balanceador no podría recibir solicitudes externas ni distribuirlas a los recursos internos, como máquinas virtuales o contenedores, que se encuentran dentro de la red privada de Azure. 
+    
     Por eso, en escenarios donde se necesita acceso público (como páginas web o APIs), la IP pública es esencial para establecer la conexión entre los usuarios y los servicios alojados.
 
 * ¿Cuál es el propósito del *Backend Pool*?
 
-    El Backend Pool es el grupo de recursos que reciben el tráfico que llega al balanceador. Básicamente, ahí es donde metémos las máquinas virtuales, instancias de escalado automático (VMSS) u otros servicios que van a procesar las solicitudes del usuario.
+    El **Backend Pool** es el grupo de recursos que reciben el tráfico que llega al balanceador. Básicamente, ahí es donde metémos las máquinas virtuales, instancias de escalado automático (VMSS) u otros servicios que van a procesar las solicitudes del usuario.
 
 * ¿Cuál es el propósito del *Health Probe*?
 
-    El Health Probe se encarga de monitorear la salud de las instancias dentro del Backend Pool. Cada cierto tiempo, el Load Balancer hace chequeos de HTTP, TCP o HTTPS para asegurarse de que esas instancias estén vivas y funcionando correctamente.
+    El **Health Probe** se encarga de monitorear la salud de las instancias dentro del Backend Pool. Cada cierto tiempo, el Load Balancer hace chequeos de HTTP, TCP o HTTPS para asegurarse de que esas instancias estén vivas y funcionando correctamente.
 
 * ¿Cuál es el propósito de la *Load Balancing Rule*? ¿Qué tipos de sesión persistente existen, por qué esto es importante y cómo puede afectar la escalabilidad del sistema?.
 
-    La Load Balancing Rule (regla de balanceo de carga) en Azure define cómo y cuándo se distribuye el tráfico desde una dirección IP frontal (frontend) hacia el grupo de instancias del Backend Pool.
+    La **Load Balancing Rule** (regla de balanceo de carga) en Azure define cómo y cuándo se distribuye el tráfico desde una dirección IP frontal (frontend) hacia el grupo de instancias del Backend Pool.
     Su propósito es establecer el comportamiento de red deseado para garantizar una distribución eficiente del tráfico entre los recursos del backend.
 
     -----------
@@ -546,9 +563,9 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 
 * ¿Qué son las *Availability Zone* y por qué seleccionamos 3 diferentes zonas?. ¿Qué significa que una IP sea *zone-redundant*?
 
-    Las Availability Zones (Zonas de Disponibilidad) son ubicaciones físicas separadas dentro de una misma región de Azure, cada una con su propio suministro eléctrico, red y refrigeración. Su propósito principal es garantizar la alta disponibilidad y tolerancia a fallos: si una zona falla (por ejemplo, por un corte eléctrico), las otras siguen funcionando.
+    Las **Availability Zones** (Zonas de Disponibilidad) son ubicaciones físicas separadas dentro de una misma región de Azure, cada una con su propio suministro eléctrico, red y refrigeración. Su propósito principal es garantizar la alta disponibilidad y tolerancia a fallos: si una zona falla (por ejemplo, por un corte eléctrico), las otras siguen funcionando.
 
-    Seleccionar tres zonas diferentes permite distribuir los recursos críticos (como máquinas virtuales, bases de datos o balanceadores de carga) de forma redundante entre ellas. Esto mejora significativamente la resiliencia del sistema frente a fallos zonales, asegurando la continuidad del servicio incluso si una zona completa se vuelve inaccesible.
+    Seleccionar **tres zonas diferentes** permite distribuir los recursos críticos (como máquinas virtuales, bases de datos o balanceadores de carga) de forma redundante entre ellas. Esto mejora significativamente la resiliencia del sistema frente a fallos zonales, asegurando la continuidad del servicio incluso si una zona completa se vuelve inaccesible.
 
     ------------
 
@@ -556,7 +573,7 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 
 * ¿Cuál es el propósito del *Network Security Group*? 
 
-    Un Network Security Group en Azure actúa como un firewall lógico a nivel de red, permitiendo o denegando el tráfico hacia y desde los recursos de una red virtual. El NSG contiene reglas que controlan el tráfico entrante y saliente basado en criterios como puertos, direcciones IP, protocolos y etiquetas de Azure.
+    Un **Network Security Group** en Azure actúa como un firewall lógico a nivel de red, permitiendo o denegando el tráfico hacia y desde los recursos de una red virtual. El NSG contiene reglas que controlan el tráfico entrante y saliente basado en criterios como puertos, direcciones IP, protocolos y etiquetas de Azure.
 
     Su propósito principal es proteger los recursos (por ejemplo, máquinas virtuales o subredes completas) frente a accesos no autorizados o tráfico malicioso, aplicando políticas de seguridad que son fáciles de configurar, escalar y mantener.
 
