@@ -352,49 +352,69 @@ Antes de continuar puede eliminar el grupo de recursos anterior para evitar gast
 
 1. El Balanceador de Carga es un recurso fundamental para habilitar la escalabilidad horizontal de nuestro sistema, por eso en este paso cree un balanceador de carga dentro de Azure tal cual como se muestra en la imágen adjunta.
 
-![](images/part2/part2-lb-create.png)
-    
-![Image](https://github.com/user-attachments/assets/c121d7ca-3af4-411b-a11d-af29da691cd6)
-    
-![Image](https://github.com/user-attachments/assets/6a7f374e-af6e-4b9c-b23c-9085541c34ee)
+    ![](images/part2/part2-lb-create.png)
+
+    Creamos nuestro balanceador de carga, asignando el grupo de recursos limpio y las caracteristicas dadas
+        
+    ![Image](https://github.com/user-attachments/assets/c121d7ca-3af4-411b-a11d-af29da691cd6)
+
+    Tambien creamos la ip de nuestro balanceador de carga con las mismas caracteristicas dadas
+        
+    ![Image](https://github.com/user-attachments/assets/6a7f374e-af6e-4b9c-b23c-9085541c34ee)
 
 2. A continuación cree un *Backend Pool*, guiese con la siguiente imágen.
 
-![](images/part2/part2-lb-bp-create.png)
+    ![](images/part2/part2-lb-bp-create.png)
+    
+    Creamos nuestro Backend Poll asignando las caracteristicas dadas
 
-![Image](https://github.com/user-attachments/assets/9a089ab1-8ab3-498b-ba85-819efdcd1208)
+    ![Image](https://github.com/user-attachments/assets/9a089ab1-8ab3-498b-ba85-819efdcd1208)
 
-![Image](https://github.com/user-attachments/assets/fc85d94a-3d8a-4701-8775-c0de2bb3fcc1)
+    Miramos que si se haya creado y asignado al balanceador correctamente
+    
+    ![Image](https://github.com/user-attachments/assets/fc85d94a-3d8a-4701-8775-c0de2bb3fcc1)
 
 3. A continuación cree un *Health Probe*, guiese con la siguiente imágen.
 
-![](images/part2/part2-lb-hp-create.png)
+    ![](images/part2/part2-lb-hp-create.png)
 
-![Image](https://github.com/user-attachments/assets/13a06564-ef6d-49db-b77f-9acaaa701b4c)
+    Creamos nuestro Health Probe asignando las caracteristicas dadas
+    
+    ![Image](https://github.com/user-attachments/assets/13a06564-ef6d-49db-b77f-9acaaa701b4c)
 
 4. A continuación cree un *Load Balancing Rule*, guiese con la siguiente imágen.
 
-![](images/part2/part2-lb-lbr-create.png)
+    ![](images/part2/part2-lb-lbr-create.png)
 
-![Image](https://github.com/user-attachments/assets/65e5739a-1d68-408e-90bb-7bbaf307fbde)
+    Creamos nuestro Load Balancing Rule asignando las caracteristicas dadas y el Health Probe y Backend Pool anteriormente creados
+    
+    ![Image](https://github.com/user-attachments/assets/65e5739a-1d68-408e-90bb-7bbaf307fbde)
 
-![Image](https://github.com/user-attachments/assets/3777a9d1-a0e2-4037-9831-a1ce70ec1c17)
+    Verificamos que todo este correctamente configurado
+    
+    ![Image](https://github.com/user-attachments/assets/3777a9d1-a0e2-4037-9831-a1ce70ec1c17)
 
-![Image](https://github.com/user-attachments/assets/f631cc38-dc00-4797-abd5-0d73caa09851)
+    Creamos y miramos que la implementacion se haya hecho correctamente
+    
+    ![Image](https://github.com/user-attachments/assets/f631cc38-dc00-4797-abd5-0d73caa09851)
 
 5. Cree una *Virtual Network* dentro del grupo de recursos, guiese con la siguiente imágen.
 
-![](images/part2/part2-vn-create.png)
+    ![](images/part2/part2-vn-create.png)
 
-![Image](https://github.com/user-attachments/assets/bce00ddf-53c7-48f3-9c06-ef427759ea6e)
+    Creamos nuestra Virtual Network con todas las caracteristicas dadas
+    
+    ![Image](https://github.com/user-attachments/assets/bce00ddf-53c7-48f3-9c06-ef427759ea6e)
+    
+    ![Image](https://github.com/user-attachments/assets/4749efbd-72da-476f-96e4-cd8cc333bbbc)
+    
+    ![Image](https://github.com/user-attachments/assets/a5aec92e-6e08-449d-984d-73f8646e89bf)
+    
+    ![Image](https://github.com/user-attachments/assets/7b194dbb-d9f7-40e5-a8c6-b428b8699111)
 
-![Image](https://github.com/user-attachments/assets/4749efbd-72da-476f-96e4-cd8cc333bbbc)
-
-![Image](https://github.com/user-attachments/assets/a5aec92e-6e08-449d-984d-73f8646e89bf)
-
-![Image](https://github.com/user-attachments/assets/7b194dbb-d9f7-40e5-a8c6-b428b8699111)
-
-![Image](https://github.com/user-attachments/assets/b4f5ed68-5a17-483f-b72c-172f3257d358)
+    Finalmente creamos la Virtual Network y verificamos que se haya implementado correctamente
+    
+    ![Image](https://github.com/user-attachments/assets/b4f5ed68-5a17-483f-b72c-172f3257d358)
 
 #### Crear las maquinas virtuales (Nodos)
 
