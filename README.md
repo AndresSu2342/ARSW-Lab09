@@ -25,11 +25,17 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 ![Imágen 1](images/part1/part1-vm-basic-config.png)
 
+   Vamos al portal de azure, accedemos a la seccion de "virtual machines" y le damos a crear
+
    ![Image](https://github.com/user-attachments/assets/f71527b3-7a8c-4f89-a2ca-2ca920c45536)
+
+   Ponemos las caracteristicas de la maquina dadas
    
    ![Image](https://github.com/user-attachments/assets/b42ee11a-ce20-45db-a3fa-bf2b9f0a9965)
    
    ![Image](https://github.com/user-attachments/assets/beb7ecc3-e5fc-455a-862c-c269f1bfcecd)
+
+   Por ultimo revisamos, creamos y verificamos que se desarrollado correctamente
    
    ![Image](https://github.com/user-attachments/assets/087760dc-e999-449a-8870-67bb4e7bcc42)
 
@@ -37,15 +43,25 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
     `ssh scalability_lab@xxx.xxx.xxx.xxx`
 
+   Antes de conectarnos, consultamos la ip de la maquina en azure
+    
    ![Image](https://github.com/user-attachments/assets/75218613-6868-43b6-92cf-4f478d4e9cc3)
+
+   Usamos el comando en el cmd agregando el -i para que lea la llave ssh y nos pueda dar acceso
    
    ![Image](https://github.com/user-attachments/assets/fc178d50-9155-4daf-9a3a-f5e0e1d69142)
 
 3. Instale node, para ello siga la sección *Installing Node.js and npm using NVM* que encontrará en este [enlace](https://linuxize.com/post/how-to-install-node-js-on-ubuntu-18.04/).
 
+   Habilitamos el repositorio NodeSource ejecutando el comando `curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -`
+
    ![Image](https://github.com/user-attachments/assets/0d997464-ae02-4f66-a0ed-5b9e8fbf0dc5)
+
+   Una vez habilitado el repositorio NodeSource, instale Node.js y npm escribiendo `sudo apt install nodejs`
    
    ![Image](https://github.com/user-attachments/assets/74ce2278-4e7d-4108-b803-69959f8c01ea)
+
+   Verificamos que Node.js se haya instalado correctamente imprimiendo su version
    
    ![Image](https://github.com/user-attachments/assets/56858e61-e431-4975-9cc1-1d56e947b305)
 
@@ -56,6 +72,8 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
     `cd <your_repo>/FibonacciApp`
 
     `npm install`
+
+    Ejecutamos los 3 comandos para instalar la aplicacion
 
    ![Image](https://github.com/user-attachments/assets/deb28da2-4f4f-47b6-8c3e-c58dafaf761a)
 
@@ -69,11 +87,17 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 ![](images/part1/part1-vm-3000InboudRule.png)
 
+   Para eso vamos a la seccion que nos mencionan y llenamos con los datos que se nos muestran
+
    ![Image](https://github.com/user-attachments/assets/033d9254-d816-4238-8196-733c91a06b17)
+
+   Abrimos el navegador y consultamos con la url de la ip y el puerto 3000, ademas de llamar a la aplicacion y mandarle el numero a evaluar
    
    ![Image](https://github.com/user-attachments/assets/845aea9f-d4ed-4c2b-8e58-e9005eaa8bac)
 
 7. La función que calcula en enésimo número de la secuencia de Fibonacci está muy mal construido y consume bastante CPU para obtener la respuesta. Usando la consola del Browser documente los tiempos de respuesta para dicho endpoint usando los siguintes valores:
+
+    Acontinuacion, estos fueron los tiempos marcados desde la consola del navegador
 
    * Time 1000000 - 15.95 s
    * Time 1010000 - 16.28 s
@@ -86,10 +110,11 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
    * Time 1080000 - 18.87 s
    * Time 1090000 - 19.21 s
 
-
 8. Dírijase ahora a Azure y verifique el consumo de CPU para la VM. (Los resultados pueden tardar 5 minutos en aparecer).
 
 ![Imágen 2](images/part1/part1-vm-cpu.png)
+
+   Podemos ver el monitoreo de la infraestructura y consumo de recursos, acontinuacion
 
    ![Image](https://github.com/user-attachments/assets/a0ae73ae-63d4-4550-817f-86f37875a939)
 
@@ -103,12 +128,20 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
     newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
     newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10
     ```
+   
+    Instalamos newman con el comando dado
 
    ![Image](https://github.com/user-attachments/assets/ab677ce3-e611-4ac8-b50d-529675d0678f)
 
+   Desde el explorador entramos al archivo y modificamos el archivo mencionado cambiando la ip al de nuestra maquina
+
    ![Image](https://github.com/user-attachments/assets/3db1a8cc-0194-4583-becf-7df4f9b0f3f9)
 
+    Ejecutamos el comando para realizar la carga
+
    ![Image](https://github.com/user-attachments/assets/0e3f4168-56dc-4311-a528-7890bb5a83cd)
+
+    Al final miramos los resultados dados por newman
 
    ![Image](https://github.com/user-attachments/assets/f0292cc9-0767-4c04-83c1-dc8480e4026f)
 
@@ -117,9 +150,13 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 ![Imágen 3](images/part1/part1-vm-resize.png)
 
+   Seleccionamos el tamaño que se nos pide y reajustamos el tamaño de la maquina
+
    ![Image](https://github.com/user-attachments/assets/802730fc-9981-4b7a-819b-44c1aa6a6c74)
 
 11. Una vez el cambio se vea reflejado, repita el paso 7, 8 y 9.
+
+    Vemos los nuevos tiempos de respuesta, acontinuacion
 
     * Time 1000000 - 12.73 s
     * Time 1010000 - 12.89 s
@@ -132,12 +169,18 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
     * Time 1080000 - 14.70 s
     * Time 1090000 - 15.16 s
 
+    Junto al monitoreo de los recursos y infraestructura
+
    ![Image](https://github.com/user-attachments/assets/d5b65406-1052-4d6d-9466-adcf831a083e)
+
+   Y los nuevos resultados al ejecutar la carga nuevamente con newman
 
    ![Image](https://github.com/user-attachments/assets/ebf74418-9862-4f0c-a131-ad6d2f6afbd2)
 
 12. Evalue el escenario de calidad asociado al requerimiento no funcional de escalabilidad y concluya si usando este modelo de escalabilidad logramos cumplirlo.
 13. Vuelva a dejar la VM en el tamaño inicial para evitar cobros adicionales.
+
+   Reajustamos el tamaño de la maquina al inicial
 
    ![Image](https://github.com/user-attachments/assets/07cecee6-e253-406f-aa09-5fa1dddf289a)
 
@@ -297,7 +340,9 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 11. Aumente la cantidad de ejecuciones paralelas del comando de postman a `4`. ¿El comportamiento del sistema es porcentualmente mejor?
 
-    
+    Al reducir la cantidad de ejecuciones paralelas vemos que el resultado del tiempo sigue siendo casi el mismo sin haber una notable mejora
+
+    ![Image](https://github.com/user-attachments/assets/276c2bd6-43b8-4f8c-a0b9-7cb41a08e6e4)
 
 ### Parte 2 - Escalabilidad horizontal
 
@@ -308,22 +353,48 @@ Antes de continuar puede eliminar el grupo de recursos anterior para evitar gast
 1. El Balanceador de Carga es un recurso fundamental para habilitar la escalabilidad horizontal de nuestro sistema, por eso en este paso cree un balanceador de carga dentro de Azure tal cual como se muestra en la imágen adjunta.
 
 ![](images/part2/part2-lb-create.png)
+    
+![Image](https://github.com/user-attachments/assets/c121d7ca-3af4-411b-a11d-af29da691cd6)
+    
+![Image](https://github.com/user-attachments/assets/6a7f374e-af6e-4b9c-b23c-9085541c34ee)
 
 2. A continuación cree un *Backend Pool*, guiese con la siguiente imágen.
 
 ![](images/part2/part2-lb-bp-create.png)
 
+![Image](https://github.com/user-attachments/assets/9a089ab1-8ab3-498b-ba85-819efdcd1208)
+
+![Image](https://github.com/user-attachments/assets/fc85d94a-3d8a-4701-8775-c0de2bb3fcc1)
+
 3. A continuación cree un *Health Probe*, guiese con la siguiente imágen.
 
 ![](images/part2/part2-lb-hp-create.png)
+
+![Image](https://github.com/user-attachments/assets/13a06564-ef6d-49db-b77f-9acaaa701b4c)
 
 4. A continuación cree un *Load Balancing Rule*, guiese con la siguiente imágen.
 
 ![](images/part2/part2-lb-lbr-create.png)
 
+![Image](https://github.com/user-attachments/assets/65e5739a-1d68-408e-90bb-7bbaf307fbde)
+
+![Image](https://github.com/user-attachments/assets/3777a9d1-a0e2-4037-9831-a1ce70ec1c17)
+
+![Image](https://github.com/user-attachments/assets/f631cc38-dc00-4797-abd5-0d73caa09851)
+
 5. Cree una *Virtual Network* dentro del grupo de recursos, guiese con la siguiente imágen.
 
 ![](images/part2/part2-vn-create.png)
+
+![Image](https://github.com/user-attachments/assets/bce00ddf-53c7-48f3-9c06-ef427759ea6e)
+
+![Image](https://github.com/user-attachments/assets/4749efbd-72da-476f-96e4-cd8cc333bbbc)
+
+![Image](https://github.com/user-attachments/assets/a5aec92e-6e08-449d-984d-73f8646e89bf)
+
+![Image](https://github.com/user-attachments/assets/7b194dbb-d9f7-40e5-a8c6-b428b8699111)
+
+![Image](https://github.com/user-attachments/assets/b4f5ed68-5a17-483f-b72c-172f3257d358)
 
 #### Crear las maquinas virtuales (Nodos)
 
@@ -333,9 +404,17 @@ Ahora vamos a crear 3 VMs (VM1, VM2 y VM3) con direcciones IP públicas standar 
 
 ![](images/part2/part2-vm-create1.png)
 
+![Image](https://github.com/user-attachments/assets/ec8067b3-6fb8-4074-b0f4-4d01a21f263a)
+
+![Image](https://github.com/user-attachments/assets/8d01b0c2-06ba-468f-b23e-d9fed6d2752c)
+
+![Image](https://github.com/user-attachments/assets/25b8a5e6-a04d-4e24-9919-007d6b0df51f)
+
 2. En la configuración de networking, verifique que se ha seleccionado la *Virtual Network*  y la *Subnet* creadas anteriormente. Adicionalmente asigne una IP pública y no olvide habilitar la redundancia de zona.
 
 ![](images/part2/part2-vm-create2.png)
+
+
 
 3. Para el Network Security Group seleccione "avanzado" y realice la siguiente configuración. No olvide crear un *Inbound Rule*, en el cual habilite el tráfico por el puerto 3000. Cuando cree la VM2 y la VM3, no necesita volver a crear el *Network Security Group*, sino que puede seleccionar el anteriormente creado.
 
