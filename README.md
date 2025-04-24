@@ -1,6 +1,12 @@
 ### Escuela Colombiana de Ingeniería
 ### Arquitecturas de Software - ARSW
 
+---
+
+### Integrantes: Joan S. Acevedo Aguilar - Cesar A. Borray Suarez
+
+---
+
 ## Escalamiento en Azure con Maquinas Virtuales, Sacale Sets y Service Plans
 
 ### Dependencias
